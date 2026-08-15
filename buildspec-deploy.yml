@@ -3,11 +3,10 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo Logging in to Amazon ECR...
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 954568385582.dkr.ecr.ap-south-1.amazonaws.com
-
-      - echo Updating kubeconfig...
-      - aws eks update-kubeconfig --region ap-south-1 --name brain-tasks-cluster
+            - echo Installing kubectl...
+      - curl -LO "https://dl.k8s.io/release/v1.34.9/bin/linux/amd64/kubectl"
+      - install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+      - kubectl version --client
 
   build:
     commands:
