@@ -3,9 +3,11 @@ version: 0.2
 phases:
   pre_build:
     commands:
-      - echo "Checking kubectl..."
-      - curl --http1.1 -fL --retry 5 --retry-delay 3 -o kubectl https://dl.k8s.io/release/v1.34.9/bin/linux/amd64/kubectl
-      - install -m 0755 kubectl /usr/local/bin/kubectl
+      - echo "Installing kubectl..."
+      - KUBECTL_VERSION=$(curl -sL https://dl.k8s.io/release/stable.txt)
+      - curl -sL --retry 5 --retry-all-errors --retry-delay 3 -o kubectl "https://dl.k8s.io/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl"
+      - chmod +x kubectl
+      - mv kubectl /usr/local/bin/kubectl
       - kubectl version --client
       - echo "Updating kubeconfig..."
       - aws eks update-kubeconfig --region ap-south-1 --name brain-tasks-cluster
