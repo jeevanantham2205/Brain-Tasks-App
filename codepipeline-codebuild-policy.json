@@ -1,0 +1,16 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "codebuild:StartBuild",
+        "codebuild:BatchGetBuilds"
+      ],
+      "Resource": [
+        "arn:aws:codebuild:ap-south-1:954568385582:project/brain-tasks-codebuild",
+        "arn:aws:codebuild:ap-south-1:954568385582:project/brain-tasks-eks-deploy"
+      ]
+    }
+  ]
+}

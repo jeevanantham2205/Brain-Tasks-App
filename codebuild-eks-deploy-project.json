@@ -1,0 +1,20 @@
+{
+  "name": "brain-tasks-eks-deploy",
+  "description": "Deploy Brain Tasks App to Amazon EKS",
+  "source": {
+    "type": "CODEPIPELINE",
+    "buildspec": "buildspec-deploy.yml"
+  },
+  "artifacts": {
+    "type": "CODEPIPELINE"
+  },
+  "environment": {
+    "type": "LINUX_CONTAINER",
+    "image": "aws/codebuild/standard:7.0",
+    "computeType": "BUILD_GENERAL1_SMALL",
+    "privilegedMode": true,
+    "imagePullCredentialsType": "CODEBUILD"
+  },
+  "serviceRole": "arn:aws:iam::954568385582:role/BrainTasksCodeBuildRole",
+  "timeoutInMinutes": 15
+}
